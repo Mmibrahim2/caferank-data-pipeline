@@ -121,5 +121,3 @@ The pipeline stops before saving bad results when:
 ## Important note
 
 CafeRank ranks neighborhoods by the number of active cafés in the source data. It does not measure coffee quality or customer opinion.
-
-For a detailed explanation of the design and common interview questions, see [INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md).
