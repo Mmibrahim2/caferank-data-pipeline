@@ -13,7 +13,11 @@ resource "aws_s3_bucket_versioning" "data" {
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "data" {
   bucket = aws_s3_bucket.data.id
-  rule { apply_server_side_encryption_by_default { sse_algorithm = "AES256" } }
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "data" {
@@ -29,8 +33,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "data" {
   rule {
     id = "archive-raw"
     status = "Enabled"
-    filter { prefix = "raw/" }
-    transition { days = 30; storage_class = "STANDARD_IA" }
+    filter {
+      prefix = "raw/"
+    }
+    transition {
+      days          = 30
+      storage_class = "STANDARD_IA"
+    }
   }
 }
 
@@ -43,7 +52,10 @@ resource "aws_iam_openid_connect_provider" "github" {
 data "aws_iam_policy_document" "github_assume" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
-    principals { type = "Federated"; identifiers = [aws_iam_openid_connect_provider.github.arn] }
+    principals {
+      type        = "Federated"
+      identifiers = [aws_iam_openid_connect_provider.github.arn]
+    }
     condition {
       test = "StringEquals"
       variable = "token.actions.githubusercontent.com:aud"
@@ -93,7 +105,10 @@ resource "aws_iam_role_policy" "pipeline" {
 
 data "aws_vpc" "default" { default = true }
 data "aws_subnets" "default" {
-  filter { name = "vpc-id"; values = [data.aws_vpc.default.id] }
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 }
 
 resource "aws_db_subnet_group" "main" {
