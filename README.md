@@ -108,6 +108,8 @@ For a live version, you can provide:
 
 The Minneapolis open-data website is changing, so the source address is kept as a setting instead of being permanently written into the code.
 
+The AWS setup creates a small Free Plan-eligible PostgreSQL database. Its firewall is closed by default. During an automatic run, GitHub temporarily allows only the current runner to connect and removes that access when the run finishes.
+
 ## Data checks
 
 The pipeline stops before saving bad results when:

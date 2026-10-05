@@ -41,10 +41,24 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
       - name: Read database connection secret
         run: echo "DATABASE_URL=$(aws secretsmanager get-secret-value --secret-id '${{ secrets.DB_SECRET_ARN }}' --query SecretString --output text)" >> "$GITHUB_ENV"
+      - name: Allow this runner to reach PostgreSQL
+        id: database-firewall
+        run: |
+          RUNNER_IP=$(curl --fail --silent https://checkip.amazonaws.com)
+          echo "runner_ip=$RUNNER_IP" >> "$GITHUB_OUTPUT"
+          aws ec2 authorize-security-group-ingress \
+            --group-id '${{ vars.DB_SECURITY_GROUP_ID }}' \
+            --protocol tcp --port 5432 --cidr "$RUNNER_IP/32"
       - name: Run ETL
         env:
           SOURCE_URL: ${{ vars.SOURCE_URL }}
           S3_BUCKET: ${{ vars.S3_BUCKET }}
           AWS_REGION: ${{ vars.AWS_REGION }}
         run: caferank run
-
+      - name: Remove runner database access
+        if: always() && steps.database-firewall.outputs.runner_ip != ''
+        run: |
+          aws ec2 revoke-security-group-ingress \
+            --group-id '${{ vars.DB_SECURITY_GROUP_ID }}' \
+            --protocol tcp --port 5432 \
+            --cidr '${{ steps.database-firewall.outputs.runner_ip }}/32'

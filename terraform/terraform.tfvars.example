@@ -1,3 +1,1 @@
 github_repository       = "your-user/caferank"
-database_url_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:caferank/db-AbCdEf"
-

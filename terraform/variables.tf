@@ -4,8 +4,6 @@ variable "github_repository" {
   description = "GitHub owner/repository allowed to assume the pipeline role"
   type = string
 }
-variable "database_url_secret_arn" {
-  description = "ARN of an existing Secrets Manager secret containing DATABASE_URL"
-  type = string
-}
 
+variable "db_name" { type = string; default = "caferank" }
+variable "db_username" { type = string; default = "caferank_admin" }
