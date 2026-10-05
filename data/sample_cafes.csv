@@ -1,0 +1,8 @@
+license_id,business_name,category,address,neighborhood,latitude,longitude,status
+MPLS-1001,North Loop Coffee,Coffee Shop,101 N 1st St,North Loop,44.9851,-93.2694,Active
+MPLS-1002,River Cafe,Cafe,202 Main St NE,Nicollet Island - East Bank,44.9882,-93.2531,Active
+MPLS-1003,Uptown Espresso,Coffee Shop,303 Hennepin Ave,Uptown,44.9484,-93.2981,Active
+MPLS-1004,Lake Street Roasters,Coffee Roaster,404 Lake St,Lyndale,44.9489,-93.2870,Active
+MPLS-1005,Old Cafe,Restaurant,505 Closed Rd,Uptown,44.9500,-93.3000,Inactive
+MPLS-1006,North Loop Bakery Cafe,Bakery Cafe,606 Washington Ave,North Loop,44.9865,-93.2750,Active
+
