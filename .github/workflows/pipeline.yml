@@ -52,6 +52,7 @@ jobs:
       - name: Run ETL
         env:
           SOURCE_URL: ${{ vars.SOURCE_URL }}
+          SOURCE_FILE: data/sample_cafes.csv
           S3_BUCKET: ${{ vars.S3_BUCKET }}
           AWS_REGION: ${{ vars.AWS_REGION }}
         run: caferank run
