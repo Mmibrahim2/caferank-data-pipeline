@@ -1,13 +1,13 @@
 # CafeRank Data Pipeline
 
-CafeRank is a small data project that finds cafés in Minneapolis and shows which neighborhoods have the most.
+CafeRank is a small data project that finds cafes in Minneapolis and shows which neighborhoods have the most.
 
 The project automatically:
 
-1. Gets café information from a CSV file or public website.
+1. Gets cafe information from a CSV file or public website.
 2. Cleans the information and removes unusable rows.
-3. Keeps active coffee shops and cafés.
-4. Counts the cafés in each neighborhood.
+3. Keeps active coffee shops and cafes.
+4. Counts the cafes in each neighborhood.
 5. Saves the results in Amazon S3 and PostgreSQL.
 6. Runs checks to make sure the information looks correct.
 
@@ -20,7 +20,7 @@ I built CafeRank to practice turning messy public data into useful and trustwort
 ## How it works
 
 ```text
-Minneapolis café data
+Minneapolis cafe data
           ↓
    Python + Pandas
    clean and check it
@@ -30,7 +30,7 @@ Minneapolis café data
  Amazon S3 + PostgreSQL
 ```
 
-- **Python and Pandas** clean and organize the café information.
+- **Python and Pandas** clean and organize the cafe information.
 - **Amazon S3** keeps copies of the original and cleaned files.
 - **PostgreSQL** stores the results so they can be searched with SQL.
 - **Terraform** sets up the AWS resources.
@@ -41,14 +41,14 @@ Minneapolis café data
 
 Using the sample data included in this repository:
 
-| Rank | Neighborhood | Cafés |
+| Rank | Neighborhood | Cafes |
 |---:|---|---:|
 | 1 | North Loop | 2 |
 | 2 | Lyndale | 1 |
 | 2 | Nicollet Island - East Bank | 1 |
 | 2 | Uptown | 1 |
 
-Neighborhoods with the same number of cafés receive the same rank.
+Neighborhoods with the same number of cafes receive the same rank.
 
 ## Try it on your computer
 
@@ -78,7 +78,7 @@ pytest
 ```text
 src/caferank/       Python pipeline code
 tests/              Automated tests
-data/               Sample café data
+data/               Sample cafe data
 terraform/          AWS setup files
 .github/workflows/  Automatic tests and daily schedule
 ```
@@ -93,7 +93,7 @@ export DATABASE_URL='postgresql+psycopg://caferank:caferank@localhost:5432/cafer
 SOURCE_FILE=data/sample_cafes.csv caferank run
 ```
 
-Running the pipeline again updates existing café records instead of creating duplicates.
+Running the pipeline again updates existing cafe records instead of creating duplicates.
 
 ## Using real data and AWS
 
@@ -113,11 +113,11 @@ The Minneapolis open-data website is changing, so the source address is kept as 
 The pipeline stops before saving bad results when:
 
 - Important columns are missing.
-- A café ID appears more than once.
+- A cafe ID appears more than once.
 - Important values are empty.
 - Map coordinates are far outside Minneapolis.
-- The neighborhood totals do not match the café total.
+- The neighborhood totals do not match the cafe total.
 
 ## Important note
 
-CafeRank ranks neighborhoods by the number of active cafés in the source data. It does not measure coffee quality or customer opinion.
+CafeRank ranks neighborhoods by the number of active cafes in the source data. It does not measure coffee quality or customer opinion.
