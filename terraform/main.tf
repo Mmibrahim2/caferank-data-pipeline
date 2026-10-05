@@ -138,9 +138,9 @@ resource "random_password" "database" {
 resource "aws_db_instance" "postgres" {
   identifier = "${var.project_name}-postgres"
   engine = "postgres"
-  instance_class = "db.t4g.micro"
+  instance_class = "db.t3.micro"
   allocated_storage = 20
-  storage_type = "gp3"
+  storage_type = "gp2"
   db_name = var.db_name
   username = var.db_username
   password = random_password.database.result
