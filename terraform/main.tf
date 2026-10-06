@@ -64,7 +64,10 @@ data "aws_iam_policy_document" "github_assume" {
     condition {
       test = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = ["repo:${var.github_repository}:*"]
+      values = [
+        "repo:${var.github_repository}:*",
+        "repo:${replace(var.github_repository, "/", "@*/")}@*:*",
+      ]
     }
   }
 }
